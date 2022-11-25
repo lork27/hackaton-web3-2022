@@ -12,6 +12,7 @@
     "@emotion/react": "^11.10.5",
     "@mantine/carousel": "^5.8.3",
     "@mantine/core": "^5.8.3",
+    "@mantine/form": "^5.8.3",
     "@mantine/hooks": "^5.8.3",
     "@mantine/modals": "^5.8.3",
     "embla-carousel-react": "^7.0.5",
