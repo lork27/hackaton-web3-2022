@@ -7,13 +7,9 @@
 
 ### BetterHealth (better name pending)
 
-Mobile DApp that improves the ER experience. _Better Health_ finds the most efficient Emergency Room near you by clicking the `I have a medical emergency button` by using its algorithms to find the most suitable Hospital based in distance and their median reponse time at the moment of your emergency. Also it provides a QR code that the care providers can scan once you arrive so you don´t have to fill out any personal information while you are dealing.
+Web-dapp for government officials, community leaders and the citizens that keeps track of the past, present and future of Puerto Rico's infrastructure thanks to the unique capabilities of block-chain. This allows everyone to be prepared for the challenges presented by climate change. It will also track as if it were an e-shop the current status of all aids being sent to PR in an open ledger in the blockchain for everyone to check the status of the help, from the moment it's being sent to the moment it arrives to the intended area.
 
-More info and features described [here](QAsectionInOurAppGoesHere).
-
-### Tech stack used
-
-Brief description of the tech stack used, why it was used and how it was used.
+More info and features described [here](https://docs.google.com/document/d/1ka0KODidlRiqJQWurzyMf9nfxjibJfpVr4KalSl8Kdg/edit?usp=sharing).
 
 ### Team Members
 
@@ -21,3 +17,13 @@ Guillermo Lorca Lamadrid [@lork27](https://github.com/lork27) <br>
 Luis Obregon Mogollon [@luisobregon21](https://github.com/luisobregon21) <br>
 José Julian Torres Abad [@jtorres122](https://github.com/jtorres122) <br>
 Jeffrey Martinez [@jeff-28](https://github.com/Jeff-28) <br>
+
+#### How to run
+
+```bash
+Clone repo
+pnpm install -g pnpm #if pnpm is not installed already
+cd betterInfra
+pnpm install
+pnpm run dev
+```
