@@ -20,7 +20,6 @@ export default function Layout(props: LayoutProps) {
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      // navbar={<CustomNavbar />}
       footer={<CustomFooter />}
       header={<CustomHeader links={links} />}
     >
@@ -31,5 +30,5 @@ export default function Layout(props: LayoutProps) {
 
 const links = [
   { link: "/iop-map", label: "Infra Map" },
-  { link: "/aid-tracker", label: "Aid Status" },
+  { link: "/aid-track", label: "Aid Status" },
 ];

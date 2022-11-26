@@ -93,22 +93,20 @@ export function CustomHeader({ links }: CustomHeaderProps) {
   const navigate = useNavigate();
 
   const items = links.map((link, i) => (
-    <Group>
-      <a
-        key={i}
-        href={link.link}
-        className={cx(classes.link, {
-          [classes.linkActive]: active === link.link,
-        })}
-        onClick={(event) => {
-          event.preventDefault();
-          setActive(link.link);
-          navigate(link.link);
-        }}
-      >
-        {link.label}
-      </a>
-    </Group>
+    <a
+      key={i}
+      href={link.link}
+      className={cx(classes.link, {
+        [classes.linkActive]: active === link.link,
+      })}
+      onClick={(event) => {
+        event.preventDefault();
+        setActive(link.link);
+        navigate(link.link);
+      }}
+    >
+      {link.label}
+    </a>
   ));
 
   return (
@@ -129,8 +127,8 @@ export function CustomHeader({ links }: CustomHeaderProps) {
         </Group>
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
-          <ActionIcon size="lg">
-            <IconUser size={18} />
+          <ActionIcon size="lg" onClick={() => navigate("/admin")}>
+            <IconUser />
           </ActionIcon>
         </Group>
       </Container>

@@ -12,7 +12,7 @@ export default function PageRouter() {
           path="*"
           element={
             <Layout>
-              <HomePage />
+              <Navigate to={"/iop-map"} />
             </Layout>
           }
         />
