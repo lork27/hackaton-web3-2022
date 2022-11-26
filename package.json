@@ -1,8 +1,0 @@
-{
-	"dependencies": {
-		"@tabler/icons": "^1.113.0"
-	},
-	"devDependencies": {
-		"@types/node": "^18.11.9"
-	}
-}
