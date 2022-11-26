@@ -1,8 +1,12 @@
+import { HomePage } from "./pages/HomePage";
+import Layout from "./Layout";
+import LoginPage from "./pages/LoginPage";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Hello betterInfra</h1>
-    </div>
+    <Layout>
+      <LoginPage />
+    </Layout>
   );
 }
 
