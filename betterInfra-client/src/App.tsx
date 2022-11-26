@@ -1,12 +1,9 @@
-import { HomePage } from "./pages/HomePage";
-import Layout from "./Layout";
-import LoginPage from "./pages/LoginPage";
-
+import PageRouter from "./PageRouter";
 function App() {
   return (
-    <Layout>
-      <LoginPage />
-    </Layout>
+    <div className="App">
+      <PageRouter />
+    </div>
   );
 }
 

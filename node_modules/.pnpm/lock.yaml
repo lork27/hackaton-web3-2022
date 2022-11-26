@@ -1,0 +1,21 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@tabler/icons': ^1.113.0
+
+dependencies:
+  '@tabler/icons': 1.113.0
+
+packages:
+
+  /@tabler/icons/1.113.0:
+    resolution: {integrity: sha512-DjxsvR/0HFHD/utQlM+q3wpl1W2n+jgEZkyfkCkc295rCoAfeXHIBfz/9ROrSHkr205Kq/M8KpQR0Nd4kjwODQ==}
+    peerDependencies:
+      react: ^16.x || 17.x || 18.x
+      react-dom: ^16.x || 17.x || 18.x
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dev: false
