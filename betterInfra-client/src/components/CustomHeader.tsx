@@ -7,10 +7,12 @@ import {
   createStyles,
   Container,
   ActionIcon,
+  Image,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconHierarchy3, IconUser } from "@tabler/icons";
+import { IconUser } from "@tabler/icons";
 import { useNavigate } from "react-router-dom";
+import betterInfraLogo from "../assets/betterInfraLogo4.png";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -122,8 +124,7 @@ export function CustomHeader({ links }: CustomHeaderProps) {
           {items}
         </Group>
         <Group>
-          <Text>Better Infra</Text>
-          <IconHierarchy3 size={28} stroke={1.5} />
+          <Image src={betterInfraLogo} width={120} alt="better infra logo" />
         </Group>
 
         <Group spacing={0} className={classes.social} position="right" noWrap>
