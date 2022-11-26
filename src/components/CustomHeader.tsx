@@ -12,7 +12,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { IconUser } from "@tabler/icons";
 import { useNavigate } from "react-router-dom";
-import betterInfraLogo from "../assets/betterInfraLogo4.png";
+// import betterInfraLogo from "../assets/betterInfraLogo4.png";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -124,9 +124,8 @@ export function CustomHeader({ links }: CustomHeaderProps) {
           {items}
         </Group>
         <Group>
-          <Image src={betterInfraLogo} width={120} alt="better infra logo" />
+          {/* <Image src={betterInfraLogo} width={120} alt="better infra logo" /> */}
         </Group>
-
         <Group spacing={0} className={classes.social} position="right" noWrap>
           <ActionIcon size="lg" onClick={() => navigate("/admin")}>
             <IconUser />
