@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
+import AboutUs from "./pages/AboutUs";
 import AdminPage from "./pages/AdminPage";
 import AidStatusPage from "./pages/AidStatusPage";
 import HomePage from "./pages/HomePage";
@@ -37,6 +38,14 @@ export default function PageRouter() {
           element={
             <Layout>
               <AidStatusPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/about-us"
+          element={
+            <Layout>
+              <AboutUs />
             </Layout>
           }
         />

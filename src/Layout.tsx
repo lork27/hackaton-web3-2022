@@ -31,4 +31,5 @@ export default function Layout(props: LayoutProps) {
 const links = [
   { link: "/iop-map", label: "Infra Map" },
   { link: "/aid-track", label: "Aid Status" },
+  { link: "/about-us", label: "About us" },
 ];
