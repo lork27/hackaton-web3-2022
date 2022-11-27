@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Navbar, ScrollArea, Text, NavLink } from "@mantine/core";
-import { IconFingerprint, IconGauge } from "@tabler/icons";
 
-interface CustomNavBarProps {
-  links: { link: string; label: string }[];
-}
+// interface CustomNavBarProps {
+//   links: { link: string; label: string }[];
+// }
 
-export function CustomNavBar({ links }: CustomNavBarProps) {
+export function CustomNavBar() {
   return (
     <Navbar height={"100%"} p="xs" width={{ base: 300 }}>
       <Navbar.Section mt="xs" ta="center">
