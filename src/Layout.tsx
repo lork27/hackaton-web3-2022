@@ -1,6 +1,7 @@
 import { AppShell, useMantineTheme } from "@mantine/core";
 import { CustomHeader } from "./components/CustomHeader";
 import { CustomFooter } from "./components/CustomFooter";
+import { CustomNavBar } from "./components/CustomNavBar";
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -22,6 +23,7 @@ export default function Layout(props: LayoutProps) {
       asideOffsetBreakpoint="sm"
       footer={<CustomFooter />}
       header={<CustomHeader links={links} />}
+      navbar={<CustomNavBar />}
     >
       {props.children}
     </AppShell>
