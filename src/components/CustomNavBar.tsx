@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { Navbar, ScrollArea, Text, NavLink } from "@mantine/core";
-
-// interface CustomNavBarProps {
-//   links: { link: string; label: string }[];
-// }
+import { useMapController } from "../context/MapContext";
 
 export function CustomNavBar() {
+  const { setCurrentLocation, currentLocation, PRdata } = useMapController();
+  console.log("current location: ", currentLocation);
   return (
     <Navbar height={"100%"} p="xs" width={{ base: 300 }}>
       <Navbar.Section mt="xs" ta="center">
@@ -15,17 +13,27 @@ export function CustomNavBar() {
       </Navbar.Section>
 
       <Navbar.Section grow component={ScrollArea} mx="-xs" px="xs">
-        <NavLink label="San Juan" childrenOffset={28}>
-          <NavLink label="San Juan 1" />
-          <NavLink label="San Juan 2" />
-          <NavLink label="San Juan 3" childrenOffset={28} />
-        </NavLink>
-
-        <NavLink label="Bayamón" childrenOffset={28} defaultOpened>
-          <NavLink label="Lorem Ipsum" />
-          <NavLink label="Lorem Ipsum 2" />
-          <NavLink label="Lorem Ipsum 3" />
-        </NavLink>
+        {PRdata.map((location, i) => {
+          return (
+            <NavLink
+              key={i}
+              label={location.name}
+              childrenOffset={28}
+              defaultOpened={false}
+              onClick={() => setCurrentLocation(location)}
+            >
+              {location.municipalities.map((municipality, i) => {
+                return (
+                  <NavLink
+                    key={i}
+                    label={municipality.name}
+                    onClick={() => setCurrentLocation(municipality)}
+                  />
+                );
+              })}
+            </NavLink>
+          );
+        })}
       </Navbar.Section>
     </Navbar>
   );

@@ -1,5 +1,6 @@
 import PageRouter from "./PageRouter";
 import { URL } from "../api/api-config";
+import { MapController } from "./context/MapContext";
 
 //TODO: remove this once the api is properly connected
 console.log(
@@ -8,7 +9,9 @@ console.log(
 function App() {
   return (
     <div className="App">
-      <PageRouter />
+      <MapController>
+        <PageRouter />
+      </MapController>
     </div>
   );
 }
