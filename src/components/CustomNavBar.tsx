@@ -1,9 +1,9 @@
 import { Navbar, ScrollArea, Text, NavLink } from "@mantine/core";
 import { useMapController } from "../context/MapContext";
+import { PR } from "../types/districts";
 
 export function CustomNavBar() {
   const { setCurrentLocation, currentLocation, PRdata } = useMapController();
-  console.log("current location: ", currentLocation);
   return (
     <Navbar height={"100%"} p="xs" width={{ base: 300 }}>
       <Navbar.Section mt="xs" ta="center">
