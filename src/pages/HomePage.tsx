@@ -16,12 +16,20 @@ import { Modal, Button, Group, Chip } from "@mantine/core";
 import { createStyles } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
+import { StatusReportCard } from "../components/StatusReportCard";
 
 const useStyles = createStyles(() => ({
   floatButton: {
     zIndex: 10,
     position: "absolute",
     left: 0,
+    top: 0,
+  },
+
+  floatCard: {
+    zIndex: 10,
+    position: "absolute",
+    left: 100,
     top: 0,
   },
 }));
@@ -100,6 +108,9 @@ export default function HomePage() {
             Report current situation{" "}
             {currentLocation ? `in ${currentLocation.name}` : ""}
           </Button>
+        </Group>
+        <Group>
+          <StatusReportCard />
         </Group>
       </>
       <iframe
