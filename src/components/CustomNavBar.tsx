@@ -1,9 +1,16 @@
 import { Navbar, ScrollArea, Text, NavLink } from "@mantine/core";
+// import { useState } from "react";
 import { useMapController } from "../context/MapContext";
-import { PR } from "../types/districts";
+import { Distric } from "../types/districts";
 
 export function CustomNavBar() {
-  const { setCurrentLocation, currentLocation, PRdata } = useMapController();
+  const { setCurrentLocation, PRdata } = useMapController();
+  // const [opened, setOpened] = useState(false);
+
+  const handleNavLinkClick = (location: Distric) => {
+    //#TODO: open clicked navlink and close the other ones
+    setCurrentLocation(location);
+  };
   return (
     <Navbar height={"100%"} p="xs" width={{ base: 300 }}>
       <Navbar.Section mt="xs" ta="center">
@@ -20,7 +27,9 @@ export function CustomNavBar() {
               label={location.name}
               childrenOffset={28}
               defaultOpened={false}
-              onClick={() => setCurrentLocation(location)}
+              onClick={() => {
+                handleNavLinkClick(location);
+              }}
             >
               {location.municipalities.map((municipality, i) => {
                 return (

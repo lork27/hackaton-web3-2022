@@ -7,6 +7,7 @@ specifiers:
   '@mantine/form': ^5.8.3
   '@mantine/hooks': ^5.8.3
   '@mantine/modals': ^5.8.3
+  '@mantine/notifications': ^5.8.4
   '@tabler/icons': ^1.113.0
   '@types/leaflet': ^1.9.0
   '@types/node': ^18.11.9
@@ -29,6 +30,7 @@ dependencies:
   '@mantine/form': 5.8.3_react@18.2.0
   '@mantine/hooks': 5.8.3_react@18.2.0
   '@mantine/modals': 5.8.3_gtqqcbkbecpo5mfxa3iuc57uvi
+  '@mantine/notifications': 5.8.4_gtqqcbkbecpo5mfxa3iuc57uvi
   '@types/node': 18.11.9
   embla-carousel-react: 7.0.5_react@18.2.0
   leaflet: 1.9.3
@@ -578,6 +580,22 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
+  /@mantine/notifications/5.8.4_gtqqcbkbecpo5mfxa3iuc57uvi:
+    resolution: {integrity: sha512-NquuUhSg52Gnkdrh4xpj9ZeFdN5H0U5v1BWJNSCxGmjUPbqm9/IEV690Se2Z1vHYL0wO+c8wpy6ixe/T3tRRJg==}
+    peerDependencies:
+      '@mantine/core': 5.8.4
+      '@mantine/hooks': 5.8.4
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@mantine/core': 5.8.3_2vc2xgx7q2ij62urx5h5ijvzqm
+      '@mantine/hooks': 5.8.3_react@18.2.0
+      '@mantine/utils': 5.8.4_react@18.2.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-transition-group: 4.4.2_biqbaboplfbrettd7655fr4n2y
+    dev: false
+
   /@mantine/styles/5.8.3_sogmqz4enknxtkxk3k5s6bqwnq:
     resolution: {integrity: sha512-dwE3sg4UUgzpKxKE1+deYM5GkHxeIWcFu+G81MUYd+DGPv50gXrHmibs03t5a2FydwUPui8IyJya4tIMOD87QQ==}
     peerDependencies:
@@ -594,6 +612,14 @@ packages:
 
   /@mantine/utils/5.8.3_react@18.2.0:
     resolution: {integrity: sha512-MprJbMh/z3TbC8yPF2PQftitRwl58w7hvhp7O9fT+9jrvJHKM8V7r15iHMwBw2jgX6zmlksstO7QfhENc0vMHQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /@mantine/utils/5.8.4_react@18.2.0:
+    resolution: {integrity: sha512-JR5eg406hkBPmYKBznDpisv54TZO7tNw1BAFDlgXsqGE6N8EZnxTEpuS+i9rFLsqqt0QGyvmQFIl6vfser0FNQ==}
     peerDependencies:
       react: '>=16.8.0'
     dependencies:
@@ -901,6 +927,13 @@ packages:
     dependencies:
       ms: 2.1.2
     dev: true
+
+  /dom-helpers/5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
+    dependencies:
+      '@babel/runtime': 7.20.1
+      csstype: 3.1.1
+    dev: false
 
   /electron-to-chromium/1.4.284:
     resolution: {integrity: sha512-M8WEXFuKXMYMVr45fo8mq0wUrrJHheiKZf6BArTKk9ZBYCKJEOU5H8cdWgDT+qCVZf7Na4lVUaZsA+h6uA9+PA==}
@@ -1270,6 +1303,11 @@ packages:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}
     dev: true
 
+  /object-assign/4.1.1:
+    resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /parent-module/1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -1307,6 +1345,14 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: true
+
+  /prop-types/15.8.1:
+    resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      react-is: 16.13.1
+    dev: false
 
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
@@ -1374,6 +1420,20 @@ packages:
       use-latest: 1.2.1_fan5qbzahqtxlm5dzefqlqx5ia
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /react-transition-group/4.4.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==}
+    peerDependencies:
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
+    dependencies:
+      '@babel/runtime': 7.20.1
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react/18.2.0:
