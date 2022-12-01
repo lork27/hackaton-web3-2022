@@ -1,4 +1,5 @@
 export const PR = {
+  name: "Puerto Rico",
   coordinates: { x: 18.2, y: -66.2, zoom: 9.4 },
 };
 

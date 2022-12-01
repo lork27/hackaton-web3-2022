@@ -8,7 +8,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
-export function LogIn() {
+export function Login() {
   const form = useForm({
     initialValues: {
       email: "",
@@ -20,9 +20,9 @@ export function LogIn() {
     },
   });
   return (
-    <Box sx={{ maxWidth: 300 }} mx="auto">
+    <Box sx={{ maxWidth: 400 }} mx="auto">
       <>
-        <Text>Admin login</Text>
+        <Text>Login</Text>
         <form onSubmit={form.onSubmit((values) => console.log(values))}>
           <TextInput
             withAsterisk
@@ -38,7 +38,7 @@ export function LogIn() {
             {...form.getInputProps("password")}
           />
 
-          <Group position="right" mt="md">
+          <Group position="right" m="md">
             <Button type="submit">Submit</Button>
           </Group>
         </form>

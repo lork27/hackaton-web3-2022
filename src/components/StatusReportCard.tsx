@@ -2,10 +2,8 @@ import { useMapController } from "../context/MapContext";
 import {
   RingProgress,
   Text,
-  SimpleGrid,
   Paper,
   Center,
-  Group,
   createStyles,
   Stack,
 } from "@mantine/core";
@@ -20,6 +18,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
+//#TODO: draw the rings and stat based on info within the municipality or district
 export function StatusReportCard() {
   const { currentLocation } = useMapController();
   const { classes } = useStyles();

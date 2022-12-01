@@ -1,7 +1,7 @@
 import { Navbar, ScrollArea, Text, NavLink } from "@mantine/core";
 // import { useState } from "react";
 import { useMapController } from "../context/MapContext";
-import { Distric } from "../types/districts";
+import { Distric, PR } from "../types/districts";
 
 export function CustomNavBar() {
   const { setCurrentLocation, PRdata } = useMapController();
@@ -18,6 +18,15 @@ export function CustomNavBar() {
           Puerto Rico's disctrics
         </Text>
       </Navbar.Section>
+
+      <NavLink
+        label={"Puerto Rico"}
+        childrenOffset={28}
+        defaultOpened={false}
+        onClick={() => {
+          handleNavLinkClick(PR as Distric);
+        }}
+      />
 
       <Navbar.Section grow component={ScrollArea} mx="-xs" px="xs">
         {PRdata.map((location, i) => {

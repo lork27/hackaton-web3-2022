@@ -1,22 +1,16 @@
-import {
-  AspectRatio,
-  Stack,
-  Text,
-  TextInput,
-  Slider,
-  Notification,
-} from "@mantine/core";
+import { AspectRatio, Stack, Text, TextInput, Slider } from "@mantine/core";
 // import { Marker, Popup, MapContainer, TileLayer, useMap } from "react-leaflet";
 import { PR } from "../types/districts";
 import { useViewportSize } from "@mantine/hooks";
 import { useMapController } from "../context/MapContext";
 
 import { useState } from "react";
-import { Modal, Button, Group, Chip } from "@mantine/core";
+import { Modal, Button, Group } from "@mantine/core";
 import { createStyles } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
 import { StatusReportCard } from "../components/StatusReportCard";
+import { ReportStatusFormDialog } from "../components/ReportStatusFormDialog";
 
 const useStyles = createStyles(() => ({
   floatButton: {
@@ -49,15 +43,18 @@ export default function HomePage() {
   });
 
   const handleReportClick = () => {
-    if (currentLocation) {
+    if (currentLocation && currentLocation.name !== "Puerto Rico") {
       setOpened(true);
     } else {
       showNotification({
-        title: "Default notification",
+        title: "Alert",
         message: "Select a district or municipality first",
       });
     }
   };
+
+  const locationName =
+    currentLocation?.name === "Puerto Rico" ? " " : currentLocation?.name;
 
   return (
     <AspectRatio ratio={width / height}>
@@ -65,39 +62,9 @@ export default function HomePage() {
         <Modal
           opened={opened}
           onClose={() => setOpened(false)}
-          title={`Submit report for ${currentLocation?.name}`}
+          title={`Submit report for ${locationName}`}
         >
-          <form onSubmit={form.onSubmit((values) => console.log(values))}>
-            <TextInput
-              withAsterisk
-              label="lorem"
-              placeholder="Lorem Ipsum"
-              {...form.getInputProps("lorem")}
-            />
-            <TextInput
-              label="ipsum"
-              placeholder="ipsum"
-              {...form.getInputProps("ipsum")}
-            />
-            <Stack m={20}>
-              <Text c="dimmed">Power</Text>
-              <Slider
-                marks={[
-                  { value: 20, label: "20%" },
-                  { value: 50, label: "50%" },
-                  { value: 80, label: "80%" },
-                ]}
-              />
-            </Stack>
-            <Stack mt="md">
-              <Chip defaultChecked>Power</Chip>
-              <Chip defaultChecked>Running Water</Chip>
-              <Chip defaultChecked>something</Chip>
-            </Stack>
-            <Group position="right" mt="md">
-              <Button type="submit">Submit</Button>
-            </Group>
-          </form>
+          <ReportStatusFormDialog />
         </Modal>
         <Group>
           <Button
@@ -105,8 +72,7 @@ export default function HomePage() {
             onClick={handleReportClick}
             size="lg"
           >
-            Report current situation{" "}
-            {currentLocation ? `in ${currentLocation.name}` : ""}
+            Report current situation {locationName}
           </Button>
         </Group>
         <Group>
