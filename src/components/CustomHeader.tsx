@@ -8,9 +8,10 @@ import {
   Container,
   ActionIcon,
   Image,
+  useMantineColorScheme,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconUser } from "@tabler/icons";
+import { IconMoonStars, IconSun, IconUser } from "@tabler/icons";
 import { useNavigate } from "react-router-dom";
 import betterInfraLogo from "../assets/betterInfraLogo4.png";
 
@@ -93,6 +94,8 @@ export function CustomHeader({ links }: CustomHeaderProps) {
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
   const navigate = useNavigate();
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
 
   const items = links.map((link, i) => (
     <a
@@ -126,6 +129,15 @@ export function CustomHeader({ links }: CustomHeaderProps) {
         <Group>
           <Image src={betterInfraLogo} width={120} alt="better infra logo" />
         </Group>
+
+        <ActionIcon
+          variant="outline"
+          color={dark ? "yellow" : "blue"}
+          onClick={() => toggleColorScheme()}
+          title="Toggle color scheme"
+        >
+          {dark ? <IconSun size={18} /> : <IconMoonStars size={18} />}
+        </ActionIcon>
         <Group spacing={0} className={classes.social} position="right" noWrap>
           <ActionIcon size="lg" onClick={() => navigate("/admin")}>
             <IconUser />

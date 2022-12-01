@@ -7,7 +7,6 @@ import { useMapController } from "../context/MapContext";
 import { useState } from "react";
 import { Modal, Button, Group } from "@mantine/core";
 import { createStyles } from "@mantine/core";
-import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
 import { StatusReportCard } from "../components/StatusReportCard";
 import { ReportStatusFormDialog } from "../components/ReportStatusFormDialog";
@@ -34,13 +33,6 @@ export default function HomePage() {
   const { x, y, zoom } = currentLocation?.coordinates ?? PR.coordinates;
   const [opened, setOpened] = useState(false);
   const { classes } = useStyles();
-
-  const form = useForm({
-    initialValues: {
-      lorem: "",
-      ipsum: "",
-    },
-  });
 
   const handleReportClick = () => {
     if (currentLocation && currentLocation.name !== "Puerto Rico") {
@@ -71,6 +63,7 @@ export default function HomePage() {
             className={classes.floatButton}
             onClick={handleReportClick}
             size="lg"
+            color="orange.9"
           >
             Report current situation {locationName}
           </Button>
