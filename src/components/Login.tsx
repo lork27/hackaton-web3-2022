@@ -3,6 +3,7 @@ import {
   Button,
   Group,
   PasswordInput,
+  Stack,
   Text,
   TextInput,
 } from "@mantine/core";
@@ -20,29 +21,31 @@ export function Login() {
     },
   });
   return (
-    <Box sx={{ maxWidth: 400 }} mx="auto">
-      <>
-        <Text>Login</Text>
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
-          <TextInput
-            withAsterisk
-            label="Email"
-            placeholder="your@email.com"
-            {...form.getInputProps("email")}
-          />
-          <PasswordInput
-            label="Password"
-            placeholder="Password"
-            description="Password must include at least one letter, number and special character"
-            withAsterisk
-            {...form.getInputProps("password")}
-          />
+    <Box sx={{ maxWidth: 300 }} m="md">
+      <Text color="blue" fw={700}>
+        Login
+      </Text>
+      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+        <TextInput
+          m="md"
+          withAsterisk
+          label="Email"
+          placeholder="your@email.com"
+          {...form.getInputProps("email")}
+        />
+        <PasswordInput
+          m="md"
+          label="Password"
+          placeholder="Password"
+          description="Password must include at least one letter, number and special character"
+          withAsterisk
+          {...form.getInputProps("password")}
+        />
 
-          <Group position="right" m="md">
-            <Button type="submit">Submit</Button>
-          </Group>
-        </form>
-      </>
+        <Group position="center">
+          <Button type="submit">Submit</Button>
+        </Group>
+      </form>
     </Box>
   );
 }

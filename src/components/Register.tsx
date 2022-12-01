@@ -44,11 +44,14 @@ export function Register() {
   const [value, setValue] = useState<string | null>(null);
 
   return (
-    <Box sx={{ maxWidth: 300 }} mx="auto">
+    <Box sx={{ maxWidth: 300 }} mx="md">
       <>
-        <Text>Register</Text>
+        <Text color="blue" fw={700}>
+          Register
+        </Text>
         <form onSubmit={form.onSubmit((values) => console.log(values))}>
           <TextInput
+            m="md"
             withAsterisk
             label="Email"
             placeholder="your@email.com"
@@ -56,6 +59,7 @@ export function Register() {
           />
 
           <TextInput
+            m="md"
             withAsterisk
             label="First Name"
             placeholder="First Name"
@@ -63,6 +67,7 @@ export function Register() {
           />
 
           <TextInput
+            m="md"
             withAsterisk
             label="Last Name"
             placeholder="Last Name"
@@ -70,6 +75,7 @@ export function Register() {
           />
 
           <Select
+            m="md"
             label="Select your municipality of residence"
             searchable
             placeholder="Pick one"
@@ -78,6 +84,7 @@ export function Register() {
             data={municipalities}
           />
           <PasswordInput
+            m="md"
             label="Password"
             placeholder="Password"
             description="Password must include at least one letter, number and special character"
@@ -86,6 +93,7 @@ export function Register() {
           />
 
           <PasswordInput
+            m="md"
             label="Confirm Password"
             placeholder="Confirm Password"
             description="Passwords must match"
@@ -93,7 +101,7 @@ export function Register() {
             {...form.getInputProps("passwordConfirm")}
           />
 
-          <Group position="right" m="md">
+          <Group position="center" m="xl">
             <Button type="submit">Submit</Button>
           </Group>
         </form>
