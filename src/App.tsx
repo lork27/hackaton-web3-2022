@@ -1,5 +1,4 @@
 import PageRouter from "./PageRouter";
-import { URL } from "../api/api-config";
 import { MapController } from "./context/MapContext";
 import { NotificationsProvider } from "@mantine/notifications";
 import {
@@ -8,11 +7,8 @@ import {
   ColorScheme,
 } from "@mantine/core";
 import { useState } from "react";
+import { AuthController } from "./context/AuthContext";
 
-//TODO: remove this once the api is properly connected
-console.log(
-  `Api running on: ${process.env.NODE_ENV}\nConnecting to api: ${URL}`
-);
 function App() {
   const [colorScheme, setColorScheme] = useState<ColorScheme>("light");
   const toggleColorScheme = (value?: ColorScheme) =>
@@ -34,9 +30,11 @@ function App() {
             limit={3}
             autoClose={1000}
           >
-            <MapController>
-              <PageRouter />
-            </MapController>
+            <AuthController>
+              <MapController>
+                <PageRouter />
+              </MapController>
+            </AuthController>
           </NotificationsProvider>
         </MantineProvider>
       </ColorSchemeProvider>

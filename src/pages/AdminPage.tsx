@@ -1,19 +1,22 @@
-import { Paper, Tabs } from "@mantine/core";
+import { Button, Paper, Tabs } from "@mantine/core";
 import { IconLogin, IconUserPlus } from "@tabler/icons";
-import { useState } from "react";
 import { Login } from "../components/Login";
 import { Register } from "../components/Register";
+import { useAuth } from "../context/AuthContext";
 
 export default function AdminPage() {
-  const [user, setUser] = useState(false);
+  const { userData, logOut } = useAuth();
+  console.log(userData);
 
-  if (user) {
+  if (userData) {
     return (
       <>
         <h1>
           User Loged in! this will show their profile where they will be able to
           comfirm their account and change stuff
         </h1>
+        <p>{userData ?? userData}</p>
+        <Button onClick={() => logOut()}>Log out</Button>
       </>
     );
   }

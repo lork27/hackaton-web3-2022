@@ -9,7 +9,9 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { formToJSON } from "axios";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 import { PRdata } from "../types/districts";
 
@@ -28,25 +30,34 @@ const municipalities = [
 ];
 
 export function Register() {
+  const { registerUser } = useAuth();
   const form = useForm({
     initialValues: {
       email: "",
       password: "",
-      name: "",
+      firstName: "",
       lastName: "",
+      municipality: "",
       passwordConfirm: "",
-      location: "",
     },
 
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      password: (value) =>
+        value === form.values.passwordConfirm ? null : "Passwords must match",
     },
   });
-  const [value, setValue] = useState<string | null>(null);
+
+  const [value, setValue] = useState("");
 
   const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
   const currentColor = dark ? "orange" : "blue";
+
+  const handleFormSubmit = () => {
+    form.validate();
+    registerUser(form.values);
+  };
 
   return (
     <Box sx={{ maxWidth: 400 }} m="md" mx="auto">
@@ -54,7 +65,7 @@ export function Register() {
         <Text color={currentColor} fw={700}>
           Register
         </Text>
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
+        <form onSubmit={form.onSubmit(handleFormSubmit)}>
           <TextInput
             m="md"
             withAsterisk
@@ -78,7 +89,6 @@ export function Register() {
             placeholder="Last Name"
             {...form.getInputProps("lastName")}
           />
-
           <Select
             m="md"
             label="Select your municipality of residence"
@@ -87,6 +97,7 @@ export function Register() {
             value={value}
             onChange={setValue}
             data={municipalities}
+            {...form.getInputProps("municipality")}
           />
           <PasswordInput
             m="md"
