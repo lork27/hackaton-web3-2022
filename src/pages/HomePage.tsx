@@ -1,4 +1,11 @@
-import { AspectRatio, Stack, Text, TextInput, Slider } from "@mantine/core";
+import {
+  AspectRatio,
+  Stack,
+  Text,
+  TextInput,
+  Slider,
+  useMantineColorScheme,
+} from "@mantine/core";
 // import { Marker, Popup, MapContainer, TileLayer, useMap } from "react-leaflet";
 import { PR } from "../types/districts";
 import { useViewportSize } from "@mantine/hooks";
@@ -33,6 +40,8 @@ export default function HomePage() {
   const { x, y, zoom } = currentLocation?.coordinates ?? PR.coordinates;
   const [opened, setOpened] = useState(false);
   const { classes } = useStyles();
+  const { colorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
 
   const handleReportClick = () => {
     if (currentLocation && currentLocation.name !== "Puerto Rico") {
@@ -63,7 +72,8 @@ export default function HomePage() {
             className={classes.floatButton}
             onClick={handleReportClick}
             size="lg"
-            color="orange.9"
+            // color="orange.9"
+            color={dark ? "orange.9" : "blue.5"}
           >
             Report current situation {locationName}
           </Button>

@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   Select,
+  useMantineColorScheme,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
@@ -43,10 +44,14 @@ export function Register() {
   });
   const [value, setValue] = useState<string | null>(null);
 
+  const { colorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
+  const currentColor = dark ? "orange" : "blue";
+
   return (
     <Box sx={{ maxWidth: 300 }} mx="md">
       <>
-        <Text color="blue" fw={700}>
+        <Text color={currentColor} fw={700}>
           Register
         </Text>
         <form onSubmit={form.onSubmit((values) => console.log(values))}>
@@ -102,7 +107,9 @@ export function Register() {
           />
 
           <Group position="center" m="xl">
-            <Button type="submit">Submit</Button>
+            <Button type="submit" color={currentColor}>
+              Submit
+            </Button>
           </Group>
         </form>
       </>

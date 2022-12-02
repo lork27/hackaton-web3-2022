@@ -3,13 +3,17 @@ import {
   Button,
   Group,
   PasswordInput,
-  Stack,
   Text,
   TextInput,
+  useMantineColorScheme,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 export function Login() {
+  const { colorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
+  const currentColor = dark ? "orange" : "blue";
+
   const form = useForm({
     initialValues: {
       email: "",
@@ -22,7 +26,7 @@ export function Login() {
   });
   return (
     <Box sx={{ maxWidth: 300 }} m="md">
-      <Text color="blue" fw={700}>
+      <Text color={currentColor} fw={700}>
         Login
       </Text>
       <form onSubmit={form.onSubmit((values) => console.log(values))}>
@@ -43,7 +47,9 @@ export function Login() {
         />
 
         <Group position="center">
-          <Button type="submit">Submit</Button>
+          <Button type="submit" color={currentColor}>
+            Submit
+          </Button>
         </Group>
       </form>
     </Box>

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   Header,
-  Text,
   Burger,
   Group,
   createStyles,
@@ -13,7 +12,8 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { IconMoonStars, IconSun, IconUser } from "@tabler/icons";
 import { useNavigate } from "react-router-dom";
-import betterInfraLogo from "../assets/betterInfraLogo4.png";
+import betterInfraLogoWhite from "../assets/betterInfraLogoWhite.png";
+import betterInfraLogoDark from "../assets/betterInfraLogoDark.png";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -60,7 +60,7 @@ const useStyles = createStyles((theme) => ({
     textDecoration: "none",
     color:
       theme.colorScheme === "dark"
-        ? theme.colors.dark[0]
+        ? theme.colors.gray[0]
         : theme.colors.gray[7],
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
@@ -77,10 +77,16 @@ const useStyles = createStyles((theme) => ({
     "&, &:hover": {
       backgroundColor: theme.fn.variant({
         variant: "light",
-        color: theme.primaryColor,
+        color:
+          theme.colorScheme === "dark"
+            ? theme.colors.blue[5]
+            : theme.colors.red[2],
       }).background,
-      color: theme.fn.variant({ variant: "light", color: theme.primaryColor })
-        .color,
+
+      color:
+        theme.colorScheme === "dark"
+          ? theme.colors.orange[5]
+          : theme.colors.blue[5],
     },
   },
 }));
@@ -127,7 +133,11 @@ export function CustomHeader({ links }: CustomHeaderProps) {
           {items}
         </Group>
         <Group>
-          <Image src={betterInfraLogo} width={120} alt="better infra logo" />
+          <Image
+            src={dark ? betterInfraLogoDark : betterInfraLogoWhite}
+            width={120}
+            alt="better infra logo"
+          />
         </Group>
 
         <ActionIcon

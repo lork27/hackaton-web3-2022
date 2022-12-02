@@ -1,10 +1,19 @@
-import { Navbar, ScrollArea, Text, NavLink } from "@mantine/core";
+import {
+  Navbar,
+  ScrollArea,
+  Text,
+  NavLink,
+  useMantineColorScheme,
+} from "@mantine/core";
 // import { useState } from "react";
 import { useMapController } from "../context/MapContext";
 import { Distric, PR } from "../types/districts";
 
 export function CustomNavBar() {
   const { setCurrentLocation, PRdata } = useMapController();
+
+  const { colorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
   // const [opened, setOpened] = useState(false);
 
   const handleNavLinkClick = (location: Distric) => {
@@ -14,7 +23,7 @@ export function CustomNavBar() {
   return (
     <Navbar height={"100%"} p="xs" width={{ base: 300 }}>
       <Navbar.Section mt="xs" ta="center">
-        <Text fz="xl" color="blue">
+        <Text fz="xl" color={dark ? "orange" : "blue"}>
           Puerto Rico's disctrics
         </Text>
       </Navbar.Section>
