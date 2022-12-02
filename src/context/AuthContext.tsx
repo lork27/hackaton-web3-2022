@@ -55,20 +55,21 @@ export const AuthController = (props: any) => {
 
   const registerUser = async function (params: authObject) {
     console.log("trying to register: ", params);
+    console.log(await api.get("/"));
     const { firstName, lastName, email, password, onSuccess, municipality } =
       params;
     setError(undefined);
     const response = await api.post(
-      "signup",
+      "/signup",
       { firstName, lastName, email, password, municipality },
       { validateStatus: () => true }
     );
 
     console.log({ response });
     if (response.status === 201) {
-      setUserData(response.data);
+      setUserData(response.data.newUser);
       console.log(userData);
-      setLocalData(response.data);
+      setLocalData(response.data.newUser);
       addAuthHeader();
       if (onSuccess) {
         onSuccess;

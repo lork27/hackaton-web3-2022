@@ -15,7 +15,7 @@ export default function AdminPage() {
           User Loged in! this will show their profile where they will be able to
           comfirm their account and change stuff
         </h1>
-        <p>{userData ?? userData}</p>
+        <p>{userData ? userData : ""}</p>
         <Button onClick={() => logOut()}>Log out</Button>
       </>
     );
