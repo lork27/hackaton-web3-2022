@@ -72,7 +72,6 @@ export default function HomePage() {
             className={classes.floatButton}
             onClick={handleReportClick}
             size="lg"
-            // color="orange.9"
             color={dark ? "orange.9" : "blue.5"}
           >
             Report current situation {locationName}

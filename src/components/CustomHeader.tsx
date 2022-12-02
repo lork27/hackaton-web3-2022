@@ -142,7 +142,7 @@ export function CustomHeader({ links }: CustomHeaderProps) {
 
         <ActionIcon
           variant="outline"
-          color={dark ? "yellow" : "blue"}
+          color={dark ? "orange" : "blue"}
           onClick={() => toggleColorScheme()}
           title="Toggle color scheme"
         >

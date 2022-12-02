@@ -2,6 +2,7 @@ import { AppShell, useMantineTheme } from "@mantine/core";
 import { CustomHeader } from "./components/CustomHeader";
 import { CustomFooter } from "./components/CustomFooter";
 import { CustomNavBar } from "./components/CustomNavBar";
+import { useParams } from "react-router-dom";
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -9,6 +10,7 @@ export interface LayoutProps {
 
 export default function Layout(props: LayoutProps) {
   const theme = useMantineTheme();
+  const navbar = window.location.href.includes("iop-map");
   return (
     <AppShell
       styles={{
@@ -23,7 +25,7 @@ export default function Layout(props: LayoutProps) {
       asideOffsetBreakpoint="sm"
       footer={<CustomFooter />}
       header={<CustomHeader links={links} />}
-      navbar={<CustomNavBar />}
+      navbar={navbar ? <CustomNavBar /> : undefined}
     >
       {props.children}
     </AppShell>
