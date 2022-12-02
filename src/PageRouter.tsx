@@ -1,11 +1,14 @@
+import { Stack } from "@mantine/core";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
 import AboutUs from "./pages/AboutUs";
 import AdminPage from "./pages/AdminPage";
 import AidStatusPage from "./pages/AidStatusPage";
 import HomePage from "./pages/HomePage";
+import { useViewportSize } from "@mantine/hooks";
 
 export default function PageRouter() {
+  const { width } = useViewportSize();
   return (
     <BrowserRouter>
       <Routes>
@@ -29,7 +32,9 @@ export default function PageRouter() {
           path="/admin"
           element={
             <Layout>
-              <AdminPage />
+              <Stack w={width > 900 ? 600 : width - 20} mx={"auto"}>
+                <AdminPage />
+              </Stack>
             </Layout>
           }
         />
@@ -37,7 +42,9 @@ export default function PageRouter() {
           path="/aid-track"
           element={
             <Layout>
-              <AidStatusPage />
+              <Stack w={width > 900 ? 600 : width - 20} mx={"auto"}>
+                <AidStatusPage />
+              </Stack>
             </Layout>
           }
         />

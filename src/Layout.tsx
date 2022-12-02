@@ -2,7 +2,6 @@ import { AppShell, useMantineTheme } from "@mantine/core";
 import { CustomHeader } from "./components/CustomHeader";
 import { CustomFooter } from "./components/CustomFooter";
 import { CustomNavBar } from "./components/CustomNavBar";
-import { useParams } from "react-router-dom";
 
 export interface LayoutProps {
   children: React.ReactNode;
@@ -17,7 +16,7 @@ export default function Layout(props: LayoutProps) {
         main: {
           background:
             theme.colorScheme === "dark"
-              ? theme.colors.dark[8]
+              ? theme.colors.dark[9]
               : theme.colors.gray[0],
         },
       }}

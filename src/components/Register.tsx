@@ -49,7 +49,7 @@ export function Register() {
   const currentColor = dark ? "orange" : "blue";
 
   return (
-    <Box sx={{ maxWidth: 300 }} mx="md">
+    <Box sx={{ maxWidth: 400 }} m="md" mx="auto">
       <>
         <Text color={currentColor} fw={700}>
           Register
@@ -68,7 +68,7 @@ export function Register() {
             withAsterisk
             label="First Name"
             placeholder="First Name"
-            {...form.getInputProps("name")}
+            {...form.getInputProps("firstName")}
           />
 
           <TextInput

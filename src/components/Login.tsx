@@ -25,7 +25,7 @@ export function Login() {
     },
   });
   return (
-    <Box sx={{ maxWidth: 300 }} m="md">
+    <Box sx={{ maxWidth: 400 }} m="md" mx={"auto"}>
       <Text color={currentColor} fw={700}>
         Login
       </Text>
