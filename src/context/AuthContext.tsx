@@ -29,12 +29,15 @@ export const AuthController = (props: any) => {
   );
   const [error, setError] = useState(undefined);
 
+  console.log({ userData });
+  console.log(JSON.parse(localStorage.getItem("user")!));
+
   const logIn = async function (params: authObject) {
     console.log("trying to log in: ", params);
     setError(undefined);
     const { password, email, onSuccess } = params;
     const response = await api.post(
-      "user/login",
+      "users/login",
       { email, password },
       { validateStatus: () => true }
     );
