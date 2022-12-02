@@ -14,6 +14,8 @@ import { IconMoonStars, IconSun, IconUser } from "@tabler/icons";
 import { useNavigate } from "react-router-dom";
 import betterInfraLogoWhite from "../assets/betterInfraLogoWhite.png";
 import betterInfraLogoDark from "../assets/betterInfraLogoDark.png";
+import { useAuth } from "../context/AuthContext";
+import { HeaderMenu } from "./HeaderMenu";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -102,6 +104,7 @@ export function CustomHeader({ links }: CustomHeaderProps) {
   const navigate = useNavigate();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
+  const { userData } = useAuth();
 
   const items = links.map((link, i) => (
     <a
@@ -149,9 +152,13 @@ export function CustomHeader({ links }: CustomHeaderProps) {
           {dark ? <IconSun size={18} /> : <IconMoonStars size={18} />}
         </ActionIcon>
         <Group spacing={0} className={classes.social} position="right" noWrap>
-          <ActionIcon size="lg" onClick={() => navigate("/admin")}>
-            <IconUser />
-          </ActionIcon>
+          {userData ? (
+            <HeaderMenu />
+          ) : (
+            <ActionIcon size="lg" onClick={() => navigate("/admin")}>
+              <IconUser />
+            </ActionIcon>
+          )}
         </Group>
       </Container>
     </Header>

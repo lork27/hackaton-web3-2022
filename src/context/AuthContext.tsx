@@ -7,7 +7,18 @@ export type authObject = {
   email?: string;
   password?: string;
   municipality?: string;
-  onSuccess?: () => {};
+  onSuccess?: () => void;
+};
+
+export type userDataType = {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  municipality?: string;
+  reports?: [];
+  phone?: string;
+  verified?: string;
 };
 
 addAuthHeader();
@@ -20,7 +31,7 @@ const AuthContext = createContext({
   logIn: (params: authObject) => {},
   logOut: (onSucces?: authObject["onSuccess"]) => {},
   registerUser: (params: authObject) => {},
-  userData: undefined,
+  userData: {} as userDataType,
 });
 
 export const AuthController = (props: any) => {
@@ -33,7 +44,6 @@ export const AuthController = (props: any) => {
   console.log(JSON.parse(localStorage.getItem("user")!));
 
   const logIn = async function (params: authObject) {
-    console.log("trying to log in: ", params);
     setError(undefined);
     const { password, email, onSuccess } = params;
     const response = await api.post(
@@ -41,24 +51,21 @@ export const AuthController = (props: any) => {
       { email, password },
       { validateStatus: () => true }
     );
-    if (response.status === 201) {
+    if (response.status === 200) {
       setUserData(response.data);
-      console.log("log in: ", userData);
       setLocalData(response.data);
       addAuthHeader();
       if (onSuccess) {
         onSuccess();
       }
     }
-    if (response.status !== 201) {
+    if (response.status !== 200) {
       setError(response.data.error);
       console.log(error);
     }
   };
 
   const registerUser = async function (params: authObject) {
-    console.log("trying to register: ", params);
-    console.log(await api.get("/"));
     const { firstName, lastName, email, password, onSuccess, municipality } =
       params;
     setError(undefined);
@@ -68,7 +75,6 @@ export const AuthController = (props: any) => {
       { validateStatus: () => true }
     );
 
-    console.log({ response });
     if (response.status === 201) {
       setUserData(response.data.newUser);
       console.log(userData);
@@ -84,13 +90,10 @@ export const AuthController = (props: any) => {
     }
   };
 
-  const logOut = async function (onSuccess: authObject["onSuccess"]) {
+  const logOut = async function () {
     api.put("users/logout");
     localStorage.removeItem("user");
     removeAuthHeader();
-    if (onSuccess) {
-      onSuccess();
-    }
   };
 
   return (
