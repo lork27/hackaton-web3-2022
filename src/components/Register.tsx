@@ -31,7 +31,7 @@ const municipalities = [
 
 export function Register() {
   const { registerUser } = useAuth();
-  const form = useForm({
+  const form: any = useForm({
     initialValues: {
       email: "",
       password: "",

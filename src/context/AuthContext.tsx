@@ -1,13 +1,13 @@
 import { createContext, useContext, useState } from "react";
 import { api, addAuthHeader, removeAuthHeader } from "../../api/api-config";
 
-type authObject = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  municipality: string;
-  onSuccess: () => {};
+export type authObject = {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  municipality?: string;
+  onSuccess?: () => {};
 };
 
 addAuthHeader();
@@ -18,7 +18,7 @@ const setLocalData = (userData: any) => {
 
 const AuthContext = createContext({
   logIn: (params: authObject) => {},
-  logOut: (onSucces: authObject["onSuccess"]) => {},
+  logOut: (onSucces?: authObject["onSuccess"]) => {},
   registerUser: (params: authObject) => {},
   userData: undefined,
 });
