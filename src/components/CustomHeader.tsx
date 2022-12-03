@@ -122,7 +122,7 @@ export function CustomHeader({ links }: CustomHeaderProps) {
         >
           {dark ? <IconSun size={18} /> : <IconMoonStars size={18} />}
         </ActionIcon>
-        <Group spacing={0} className={classes.social} position="right" noWrap>
+        <Group spacing={0} position="right" noWrap>
           {userData ? (
             <HeaderMenu />
           ) : (
