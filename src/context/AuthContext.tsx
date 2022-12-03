@@ -18,7 +18,7 @@ export type userDataType = {
   municipality?: string;
   reports?: [];
   phone?: string;
-  verified?: string;
+  verified?: {};
 };
 
 addAuthHeader();
@@ -31,6 +31,7 @@ const AuthContext = createContext({
   logIn: (params: authObject) => {},
   logOut: (onSucces?: authObject["onSuccess"]) => {},
   registerUser: (params: authObject) => {},
+  verifyUser: (walletAddress: string) => {},
   userData: {} as userDataType,
 });
 
@@ -39,9 +40,6 @@ export const AuthController = (props: any) => {
     JSON.parse(localStorage.getItem("user")!)
   );
   const [error, setError] = useState(undefined);
-
-  console.log({ userData });
-  console.log(JSON.parse(localStorage.getItem("user")!));
 
   const logIn = async function (params: authObject) {
     setError(undefined);
@@ -77,7 +75,6 @@ export const AuthController = (props: any) => {
 
     if (response.status === 201) {
       setUserData(response.data.newUser);
-      console.log(userData);
       setLocalData(response.data.newUser);
       addAuthHeader();
       if (onSuccess) {
@@ -96,12 +93,30 @@ export const AuthController = (props: any) => {
     removeAuthHeader();
   };
 
+  const verifyUser = async function (walletAddress: string) {
+    setError(undefined);
+    const response = await api.put(
+      "user/verifyUser",
+      { walletAddress },
+      { validateStatus: () => true }
+    );
+    if (response.status === 200) {
+      setUserData(response.data);
+      setLocalData(response.data);
+    }
+    if (response.status !== 200) {
+      setError(response.data.error);
+      console.log(error);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
         logIn,
         logOut,
         registerUser,
+        verifyUser,
         userData,
       }}
     >

@@ -7,7 +7,6 @@ import { useAuth } from "../context/AuthContext";
 
 export default function AdminPage() {
   const { userData } = useAuth();
-  console.log(userData);
 
   if (userData) {
     return <UserProfile />;

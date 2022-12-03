@@ -38,8 +38,6 @@ export default function HomePage() {
   const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
 
-  console.log({ currentLocation });
-
   const handleReportClick = () => {
     if (
       currentLocation?.name !== "Puerto Rico" &&
