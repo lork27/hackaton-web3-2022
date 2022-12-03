@@ -18,8 +18,14 @@ export type userDataType = {
   municipality?: string;
   reports?: [];
   phone?: string;
-  verified?: {};
+  verified?: verified;
   createdAt?: string;
+};
+
+type verified = {
+  verifiedDate: string;
+  blockchainUID: string;
+  walletAddress: string;
 };
 
 addAuthHeader();
@@ -74,9 +80,11 @@ export const AuthController = (props: any) => {
       { validateStatus: () => true }
     );
 
+    console.log(response.data);
+
     if (response.status === 201) {
-      setUserData(response.data.newUser);
-      setLocalData(response.data.newUser);
+      setUserData(response.data);
+      setLocalData(response.data);
       addAuthHeader();
       if (onSuccess) {
         onSuccess;

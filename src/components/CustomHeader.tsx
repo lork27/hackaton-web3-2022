@@ -9,7 +9,6 @@ import {
   Image,
   useMantineColorScheme,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
 import { IconMoonStars, IconSun, IconUser } from "@tabler/icons";
 import { useNavigate } from "react-router-dom";
 import betterInfraLogoWhite from "../assets/betterInfraLogoWhite.png";
@@ -23,33 +22,12 @@ const useStyles = createStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     height: 56,
-
-    [theme.fn.smallerThan("sm")]: {
-      justifyContent: "flex-start",
-    },
   },
 
   links: {
-    width: 260,
+    width: 300,
 
-    [theme.fn.smallerThan("sm")]: {
-      display: "none",
-    },
-  },
-
-  social: {
-    width: 260,
-
-    [theme.fn.smallerThan("sm")]: {
-      width: "auto",
-      marginLeft: "auto",
-    },
-  },
-
-  burger: {
-    marginRight: theme.spacing.md,
-
-    [theme.fn.largerThan("sm")]: {
+    [theme.fn.smallerThan("xs")]: {
       display: "none",
     },
   },
@@ -57,7 +35,7 @@ const useStyles = createStyles((theme) => ({
   link: {
     display: "block",
     lineHeight: 1,
-    padding: "8px 10px",
+    padding: "4px 10px",
     borderRadius: theme.radius.sm,
     textDecoration: "none",
     color:
@@ -65,7 +43,7 @@ const useStyles = createStyles((theme) => ({
         ? theme.colors.gray[0]
         : theme.colors.gray[7],
     fontSize: theme.fontSizes.sm,
-    fontWeight: 500,
+    fontWeight: 400,
 
     "&:hover": {
       backgroundColor:
@@ -98,7 +76,6 @@ interface CustomHeaderProps {
 }
 
 export function CustomHeader({ links }: CustomHeaderProps) {
-  const [opened, { toggle }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
   const navigate = useNavigate();
@@ -126,12 +103,6 @@ export function CustomHeader({ links }: CustomHeaderProps) {
   return (
     <Header height={56} mb={120}>
       <Container className={classes.inner}>
-        <Burger
-          opened={opened}
-          onClick={toggle}
-          size="sm"
-          className={classes.burger}
-        />
         <Group className={classes.links} spacing={5}>
           {items}
         </Group>

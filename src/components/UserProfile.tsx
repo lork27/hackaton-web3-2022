@@ -22,7 +22,6 @@ export function UserProfile() {
   const dark = colorScheme === "dark";
   const currentColor = dark ? "orange" : "blue";
 
-  console.log({ userData });
   return (
     <>
       <Modal
@@ -49,9 +48,10 @@ export function UserProfile() {
             </Text>
             <Text my={"xs"}>Name: {userName}</Text>
             <Text my={"xs"}>
-              {/* User since: {userData?.createdAt?.split("T")[0]} */}
-              ""
+              User since: {userData?.createdAt?.split("T")[0]}
             </Text>
+            <Text my={"xs"}>Number of reports(verified/pending): 14/20</Text>
+            <Text my={"xs"}>Number of bad reports: 0/20</Text>
             <Grid m={1}>
               {isEmpty(userData?.verified) ? (
                 <>
@@ -69,7 +69,10 @@ export function UserProfile() {
                 </>
               ) : (
                 <>
-                  <Text my={"xs"}>Verified since: {""}</Text>
+                  <Text my={"xs"}>
+                    Verified since:{" "}
+                    {userData.verified.verifiedDate.split("T")[0]}
+                  </Text>
                   <ActionIcon
                     variant="filled"
                     title="Already verified"
@@ -82,7 +85,6 @@ export function UserProfile() {
                 </>
               )}
             </Grid>
-            <Text my={"xs"}>Number of reports(verified/pending): 14/20</Text>
 
             <Text mt={"xl"}>Prestige level: 8000/10000 (bronze)</Text>
             <Progress
