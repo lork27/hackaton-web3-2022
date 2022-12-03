@@ -21,6 +21,8 @@ export function UserProfile() {
   const [opened, setOpened] = useState(false);
   const dark = colorScheme === "dark";
   const currentColor = dark ? "orange" : "blue";
+
+  console.log({ userData });
   return (
     <>
       <Modal
@@ -47,7 +49,8 @@ export function UserProfile() {
             </Text>
             <Text my={"xs"}>Name: {userName}</Text>
             <Text my={"xs"}>
-              User since: {userData?.createdAt.split("T")[0]}
+              {/* User since: {userData?.createdAt?.split("T")[0]} */}
+              ""
             </Text>
             <Grid m={1}>
               {isEmpty(userData?.verified) ? (
@@ -66,9 +69,7 @@ export function UserProfile() {
                 </>
               ) : (
                 <>
-                  <Text my={"xs"}>
-                    Verified since: {userData?.createdAt.split("T")[0]}
-                  </Text>
+                  <Text my={"xs"}>Verified since: {""}</Text>
                   <ActionIcon
                     variant="filled"
                     title="Already verified"
