@@ -1,11 +1,4 @@
-import {
-  AspectRatio,
-  Stack,
-  Text,
-  TextInput,
-  Slider,
-  useMantineColorScheme,
-} from "@mantine/core";
+import { AspectRatio, useMantineColorScheme } from "@mantine/core";
 // import { Marker, Popup, MapContainer, TileLayer, useMap } from "react-leaflet";
 import { PR } from "../types/districts";
 import { useViewportSize } from "@mantine/hooks";
@@ -17,6 +10,7 @@ import { createStyles } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { StatusReportCard } from "../components/StatusReportCard";
 import { ReportStatusFormDialog } from "../components/ReportStatusFormDialog";
+import { useAuth } from "../context/AuthContext";
 
 const useStyles = createStyles(() => ({
   floatButton: {
@@ -35,27 +29,45 @@ const useStyles = createStyles(() => ({
 }));
 
 export default function HomePage() {
+  const { userData } = useAuth();
   const { width, height } = useViewportSize();
-  const { currentLocation } = useMapController();
+  const { currentLocation, setCurrentLocation } = useMapController();
   const { x, y, zoom } = currentLocation?.coordinates ?? PR.coordinates;
   const [opened, setOpened] = useState(false);
   const { classes } = useStyles();
   const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
 
+  console.log({ currentLocation });
+
   const handleReportClick = () => {
-    if (currentLocation && currentLocation.name !== "Puerto Rico") {
+    if (
+      currentLocation?.name !== "Puerto Rico" &&
+      !currentLocation?.municipalities &&
+      userData
+    ) {
       setOpened(true);
     } else {
       showNotification({
         title: "Alert",
-        message: "Select a district or municipality first",
+        message: !userData
+          ? "You must be logged in to do a report"
+          : "Select a municipality first",
+
+        autoClose: 5000,
       });
     }
   };
 
   const locationName =
     currentLocation?.name === "Puerto Rico" ? " " : currentLocation?.name;
+
+  //#TODO: make it so users can't zoom out too far away from the island
+  // if (currentLocation?.coordinates?.zoom! < 7) {
+  //   let updateCurrentLocation = currentLocation;
+  //   updateCurrentLocation.coordinates.zoom = 2;
+  //   setCurrentLocation(updateCurrentLocation);
+  // }
 
   return (
     <AspectRatio ratio={width / height}>

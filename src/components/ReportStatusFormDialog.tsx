@@ -10,8 +10,12 @@ import {
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { showNotification } from "@mantine/notifications";
+import { useAuth } from "../context/AuthContext";
+import { isEmpty } from "lodash";
 
 export function ReportStatusFormDialog() {
+  const { userData } = useAuth();
   // #NOTE: either pass currentLocation as prop or grab it from the map context
   const form = useForm({
     initialValues: {
@@ -19,8 +23,27 @@ export function ReportStatusFormDialog() {
       ipsum: "",
     },
   });
+
+  const handleReportSubmit = () => {
+    if (!isEmpty(userData?.verified)) {
+      showNotification({
+        title: "Thanks for the report!",
+        color: "green",
+        message: "Report has been verified!",
+        autoClose: 5000,
+      });
+    } else {
+      showNotification({
+        title: "Thanks for the report!",
+        color: "green",
+        message:
+          "Report has been submited for review by the administrator team",
+        autoClose: 5000,
+      });
+    }
+  };
   return (
-    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+    <form onSubmit={form.onSubmit(handleReportSubmit)}>
       <TextInput
         withAsterisk
         label="lorem"
