@@ -19,6 +19,7 @@ export type userDataType = {
   reports?: [];
   phone?: string;
   verified?: {};
+  createdAt?: string;
 };
 
 addAuthHeader();

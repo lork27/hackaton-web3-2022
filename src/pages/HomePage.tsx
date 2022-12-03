@@ -31,7 +31,7 @@ const useStyles = createStyles(() => ({
 export default function HomePage() {
   const { userData } = useAuth();
   const { width, height } = useViewportSize();
-  const { currentLocation, setCurrentLocation } = useMapController();
+  const { currentLocation } = useMapController();
   const { x, y, zoom } = currentLocation?.coordinates ?? PR.coordinates;
   const [opened, setOpened] = useState(false);
   const { classes } = useStyles();
@@ -41,7 +41,7 @@ export default function HomePage() {
   const handleReportClick = () => {
     if (
       currentLocation?.name !== "Puerto Rico" &&
-      !currentLocation?.municipalities &&
+      !("municipalities" in currentLocation!) &&
       userData
     ) {
       setOpened(true);
