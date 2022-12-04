@@ -7,8 +7,8 @@ import {
   createStyles,
   Stack,
 } from "@mantine/core";
-import { IconArrowUpRight, IconArrowDownRight } from "@tabler/icons";
-import { flatten, isEmpty, sumBy } from "lodash";
+import { IconArrowUpRight } from "@tabler/icons";
+import { isEmpty, sumBy } from "lodash";
 import { useEffect, useState } from "react";
 import { Status } from "../types/districts";
 const useStyles = createStyles(() => ({
@@ -26,15 +26,19 @@ export function StatusReportCard() {
   const { currentLocation } = useMapController();
   const { classes } = useStyles();
   const [status, setStatus] = useState<Status>({
-    iop: 0,
-    power: 0,
-    roads: 0,
-    supplies: 0,
-    water: 0,
+    iop: 70,
+    power: 70,
+    roads: 55,
+    supplies: 70,
+    water: 80,
   });
 
   useEffect(() => {
-    if (currentLocation && "municipalities" in currentLocation) {
+    if (
+      !isEmpty(currentLocation) &&
+      "municipalities" in currentLocation &&
+      currentLocation.name !== "Puerto Rico"
+    ) {
       const munCount = currentLocation.municipalities.length;
       const iop =
         sumBy(currentLocation.municipalities.map((mun) => mun.status.iop / 4)) /
@@ -60,8 +64,7 @@ export function StatusReportCard() {
         supplies,
         water,
       });
-    } else {
-      // const iop = currentLocation?.status.iop! / 4;
+    } else if (currentLocation) {
       const { iop, power, roads, supplies, water } = currentLocation?.status!;
       setStatus({
         iop: iop / 4,
@@ -85,7 +88,7 @@ export function StatusReportCard() {
           const color =
             stat[1] > 60 ? "green" : stat[1] > 40 ? "yellow" : "red";
           return (
-            <>
+            <div>
               <RingProgress
                 size={80}
                 roundCaps
@@ -104,7 +107,7 @@ export function StatusReportCard() {
               <Text weight={700} size="xl">
                 {stat[1].toFixed(1)} %
               </Text>
-            </>
+            </div>
           );
         })}
       </Stack>
