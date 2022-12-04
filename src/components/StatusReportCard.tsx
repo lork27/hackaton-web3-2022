@@ -10,7 +10,7 @@ import {
 import { IconArrowUpRight } from "@tabler/icons";
 import { isEmpty, sumBy } from "lodash";
 import { useEffect, useState } from "react";
-import { Municipality, Status } from "../types/districts";
+import { Status } from "../types/districts";
 const useStyles = createStyles(() => ({
   floatCard: {
     zIndex: 10,

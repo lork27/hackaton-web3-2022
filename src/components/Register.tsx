@@ -9,11 +9,8 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { formToJSON } from "axios";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-
-import { PRdata } from "../types/districts";
 
 //#TODO: change this mapception to lodash to correctly create the data array for select
 // should look lile [{value: municipality.name, label: municipality.name}]

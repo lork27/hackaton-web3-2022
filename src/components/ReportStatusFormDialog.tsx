@@ -2,27 +2,55 @@
 
 import {
   Button,
-  Chip,
+  Card,
+  createStyles,
   Group,
-  Slider,
-  Stack,
+  Switch,
   Text,
-  TextInput,
+  useMantineColorScheme,
 } from "@mantine/core";
-import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
 import { useAuth } from "../context/AuthContext";
 import { isEmpty } from "lodash";
 
+const useStyles = createStyles((theme) => ({
+  card: {
+    backgroundColor:
+      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
+  },
+
+  item: {
+    "& + &": {
+      paddingTop: theme.spacing.sm,
+      marginTop: theme.spacing.sm,
+      borderTop: `1px solid ${
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[4]
+          : theme.colors.gray[2]
+      }`,
+    },
+  },
+
+  switch: {
+    "& *": {
+      cursor: "pointer",
+    },
+  },
+
+  title: {
+    lineHeight: 1,
+  },
+}));
+
 export function ReportStatusFormDialog() {
   const { userData } = useAuth();
   // #NOTE: either pass currentLocation as prop or grab it from the map context
-  const form = useForm({
-    initialValues: {
-      lorem: "",
-      ipsum: "",
-    },
-  });
+
+  const { classes } = useStyles();
+
+  const { colorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
+  const currentColor = dark ? "orange" : "blue";
 
   const handleReportSubmit = () => {
     if (!isEmpty(userData?.verified)) {
@@ -43,36 +71,63 @@ export function ReportStatusFormDialog() {
     }
   };
   return (
-    <form onSubmit={form.onSubmit(handleReportSubmit)}>
-      <TextInput
-        withAsterisk
-        label="lorem"
-        placeholder="Lorem Ipsum"
-        {...form.getInputProps("lorem")}
-      />
-      <TextInput
-        label="ipsum"
-        placeholder="ipsum"
-        {...form.getInputProps("ipsum")}
-      />
-      <Stack m={20}>
-        <Text c="dimmed">Power</Text>
-        <Slider
-          marks={[
-            { value: 20, label: "20%" },
-            { value: 50, label: "50%" },
-            { value: 80, label: "80%" },
-          ]}
+    <Card withBorder radius="md" p="xl" className={classes.card}>
+      <Text size="lg" className={classes.title} weight={500}></Text>
+      What's the situation?
+      <Text size="xs" color="dimmed" mt={3} mb="xl">
+        Select 1 or more that apply, the report will be sent using your current
+        location
+      </Text>
+      <Group position="apart" className={classes.item} noWrap spacing="xl">
+        <div>
+          <Text>Power</Text>
+          <Text size="xs" color="dimmed">
+            There's a power outage issue
+          </Text>
+        </div>
+        <Switch
+          onLabel="ON"
+          offLabel="OFF"
+          className={classes.switch}
+          size="lg"
+          color={currentColor}
         />
-      </Stack>
-      <Stack mt="md">
-        <Chip defaultChecked>Power</Chip>
-        <Chip defaultChecked>Running Water</Chip>
-        <Chip defaultChecked>something</Chip>
-      </Stack>
-      <Group position="right" mt="md">
-        <Button type="submit">Submit</Button>
       </Group>
-    </form>
+      <Group position="apart" className={classes.item} noWrap spacing="xl">
+        <div>
+          <Text>Water</Text>
+          <Text size="xs" color="dimmed">
+            There's an issue related to running water
+          </Text>
+        </div>
+        <Switch
+          onLabel="ON"
+          offLabel="OFF"
+          className={classes.switch}
+          size="lg"
+          color={currentColor}
+        />
+      </Group>
+      <Group position="apart" className={classes.item} noWrap spacing="xl">
+        <div>
+          <Text>Road</Text>
+          <Text size="xs" color="dimmed">
+            A road is blocked or damaged
+          </Text>
+        </div>
+        <Switch
+          onLabel="ON"
+          offLabel="OFF"
+          className={classes.switch}
+          size="lg"
+          color={currentColor}
+        />
+      </Group>
+      <Group position="right" mt={"xl"}>
+        <Button onClick={handleReportSubmit} color={currentColor}>
+          Submit report
+        </Button>
+      </Group>
+    </Card>
   );
 }
