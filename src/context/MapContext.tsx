@@ -3,7 +3,7 @@ import { api } from "../../api/api-config";
 import type { Distric, Districs, Municipality } from "../types/districts";
 
 type currentLocationType = Municipality | Distric | undefined;
-type navPost = {
+type navPos = {
   x: number;
   y: number;
 };
@@ -12,13 +12,14 @@ const MapContext = createContext({
   PRdata: [] as Districs,
   setCurrentLocation: (params: currentLocationType) => {},
   currentLocation: {} as currentLocationType,
+  navPos: {} as navPos,
 });
 
 export const MapController = (props: any) => {
   const [currentLocation, setCurrentLocation] =
     useState<currentLocationType>(undefined);
 
-  const [navPos, setNavPost] = useState<navPost>({
+  const [navPos, setNavPost] = useState<navPos>({
     x: currentLocation?.coordinates.x ?? 0,
     y: currentLocation?.coordinates.y ?? 0,
   });
@@ -51,20 +52,23 @@ export const MapController = (props: any) => {
       console.log(response.data);
     }
   };
-  navigator.geolocation.getCurrentPosition(function (position) {
-    // console.log("Latitude is :", position.coords.latitude);
 
-    // console.log("Longitude is :", position.coords.longitude);
-    setNavPost({
-      x: position.coords.latitude,
-      y: position.coords.longitude,
+  const getUserGeoLocation = () => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      // console.log("Latitude is :", position.coords.latitude);
+
+      // console.log("Longitude is :", position.coords.longitude);
+      setNavPost({
+        x: position.coords.latitude,
+        y: position.coords.longitude,
+      });
     });
-  });
-  console.log(navPos);
+  };
 
   useEffect(() => {
     getPRmap();
     getAllReports();
+    getUserGeoLocation();
   }, []);
 
   return (
@@ -73,6 +77,7 @@ export const MapController = (props: any) => {
         setCurrentLocation,
         currentLocation,
         PRdata,
+        navPos,
       }}
     >
       {props.children}

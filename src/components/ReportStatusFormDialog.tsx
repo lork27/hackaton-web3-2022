@@ -14,6 +14,7 @@ import { showNotification } from "@mantine/notifications";
 import { useAuth } from "../context/AuthContext";
 import { isEmpty } from "lodash";
 import { useState } from "react";
+import { useMapController } from "../context/MapContext";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -48,10 +49,13 @@ export function ReportStatusFormDialog(props: any) {
   const { userData } = useAuth();
   const { colorScheme } = useMantineColorScheme();
   const { classes } = useStyles();
+  const { navPos } = useMapController();
 
   const [loading, setLoading] = useState(false);
   const dark = colorScheme === "dark";
   const currentColor = dark ? "orange" : "blue";
+
+  console.log(navPos);
 
   const handleReportSubmit = () => {
     setLoading(true);
