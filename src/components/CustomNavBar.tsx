@@ -7,7 +7,7 @@ import {
 } from "@mantine/core";
 // import { useState } from "react";
 import { useMapController } from "../context/MapContext";
-import { Distric, PR } from "../types/districts";
+import { Distric, Municipality, PR } from "../types/districts";
 
 export function CustomNavBar() {
   const { setCurrentLocation, PRdata } = useMapController();
@@ -16,7 +16,7 @@ export function CustomNavBar() {
   const dark = colorScheme === "dark";
   // const [opened, setOpened] = useState(false);
 
-  const handleNavLinkClick = (location: Distric) => {
+  const handleNavLinkClick = (location: Distric | Municipality) => {
     //#TODO: open clicked navlink and close the other ones
     setCurrentLocation(location);
   };

@@ -8,6 +8,9 @@ import {
   Stack,
 } from "@mantine/core";
 import { IconArrowUpRight, IconArrowDownRight } from "@tabler/icons";
+import { flatten, isEmpty, sumBy } from "lodash";
+import { useEffect, useState } from "react";
+import { Status } from "../types/districts";
 const useStyles = createStyles(() => ({
   floatCard: {
     zIndex: 10,
@@ -22,6 +25,54 @@ const useStyles = createStyles(() => ({
 export function StatusReportCard() {
   const { currentLocation } = useMapController();
   const { classes } = useStyles();
+  const [status, setStatus] = useState<Status>({
+    iop: 0,
+    power: 0,
+    roads: 0,
+    supplies: 0,
+    water: 0,
+  });
+
+  useEffect(() => {
+    if (currentLocation && "municipalities" in currentLocation) {
+      const munCount = currentLocation.municipalities.length;
+      const iop =
+        sumBy(currentLocation.municipalities.map((mun) => mun.status.iop / 4)) /
+        munCount;
+      const power =
+        sumBy(currentLocation.municipalities.map((mun) => mun.status.power)) /
+        munCount;
+      const roads =
+        sumBy(currentLocation.municipalities.map((mun) => mun.status.roads)) /
+        munCount;
+      const supplies =
+        sumBy(
+          currentLocation.municipalities.map((mun) => mun.status.supplies)
+        ) / munCount;
+      const water =
+        sumBy(currentLocation.municipalities.map((mun) => mun.status.water)) /
+        munCount;
+
+      setStatus({
+        iop,
+        power,
+        roads,
+        supplies,
+        water,
+      });
+    } else {
+      // const iop = currentLocation?.status.iop! / 4;
+      const { iop, power, roads, supplies, water } = currentLocation?.status!;
+      setStatus({
+        iop: iop / 4,
+        power,
+        roads,
+        supplies,
+        water,
+      });
+    }
+  }, [currentLocation?.name]);
+
   return (
     <Paper withBorder radius="md" p="xs" className={classes.floatCard}>
       <Stack>
@@ -30,68 +81,32 @@ export function StatusReportCard() {
             ? `${currentLocation.name}'s status`
             : "Puerto Rico's status"}
         </Text>
-        <>
-          <RingProgress
-            size={80}
-            roundCaps
-            thickness={5}
-            sections={[{ value: 90, color: "green" }]}
-            label={
-              <Center>
-                <IconArrowUpRight size={22} stroke={1.5} />
-              </Center>
-            }
-          />
+        {Object.entries(status).map((stat) => {
+          const color =
+            stat[1] > 60 ? "green" : stat[1] > 40 ? "yellow" : "red";
+          return (
+            <>
+              <RingProgress
+                size={80}
+                roundCaps
+                thickness={5}
+                sections={[{ value: stat[1], color }]}
+                label={
+                  <Center>
+                    <IconArrowUpRight size={22} stroke={1.5} />
+                  </Center>
+                }
+              />
 
-          <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
-            {"IOP"}
-          </Text>
-          <Text weight={700} size="xl">
-            {"90%"}
-          </Text>
-        </>
-
-        <>
-          <RingProgress
-            size={80}
-            roundCaps
-            thickness={5}
-            sections={[{ value: 60, color: "yellow" }]}
-            label={
-              <Center>
-                <IconArrowUpRight size={22} stroke={1.5} />
-              </Center>
-            }
-          />
-
-          <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
-            {"Power Grid"}
-          </Text>
-          <Text weight={700} size="xl">
-            {"60%"}
-          </Text>
-        </>
-
-        <>
-          <RingProgress
-            size={80}
-            roundCaps
-            thickness={5}
-            sections={[{ value: 10, color: "red" }]}
-            label={
-              <Center>
-                <IconArrowDownRight size={22} stroke={1.5} />
-              </Center>
-            }
-          />
-
-          <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
-            {"Running Water"}
-          </Text>
-          <Text weight={700} size="xl">
-            {"10%"}
-          </Text>
-        </>
+              <Text color="dimmed" size="xs" transform="uppercase" weight={700}>
+                {stat[0]}
+              </Text>
+              <Text weight={700} size="xl">
+                {stat[1].toFixed(1)} %
+              </Text>
+            </>
+          );
+        })}
       </Stack>
     </Paper>
   );
