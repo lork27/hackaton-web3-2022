@@ -11,7 +11,8 @@ import { showNotification } from "@mantine/notifications";
 import { StatusReportCard } from "../components/StatusReportCard";
 import { ReportStatusFormDialog } from "../components/ReportStatusFormDialog";
 import { useAuth } from "../context/AuthContext";
-const { VITE_USERNAME, VITE_STYLE_ID, VITE_ACCESS_TOKEN } = import.meta.env;
+const { VITE_USERNAME, VITE_STYLE_ID, VITE_ACCESS_TOKEN, VITE_STYLE_ID_DARK } =
+  import.meta.env;
 
 const useStyles = createStyles(() => ({
   floatButton: {
@@ -39,6 +40,10 @@ export default function HomePage() {
   const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
 
+  const random = () => {
+    return (Math.random() * (100 - 10 + 10)) / (zoom * 100);
+  };
+
   const handleReportClick = () => {
     if (
       currentLocation?.name !== "Puerto Rico" &&
@@ -60,8 +65,6 @@ export default function HomePage() {
 
   const locationName =
     currentLocation?.name === "Puerto Rico" ? " " : currentLocation?.name;
-
-  console.log([x, y]);
 
   return (
     <AspectRatio ratio={width / height}>
@@ -91,16 +94,46 @@ export default function HomePage() {
       <MapContainer
         key={currentLocation?.name}
         center={[x, y]}
-        zoom={zoom}
+        zoom={zoom + 1}
         scrollWheelZoom={false}
         style={{ minHeight: "90vh", minWidth: "100vw", zIndex: 0 }}
       >
         <TileLayer
           attribution='Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
-          url={`https://api.mapbox.com/styles/v1/${VITE_USERNAME}/${VITE_STYLE_ID}/tiles/256/{z}/{x}/{y}@2x?access_token=${VITE_ACCESS_TOKEN}`}
+          url={`https://api.mapbox.com/styles/v1/${VITE_USERNAME}/${
+            dark ? VITE_STYLE_ID_DARK : VITE_STYLE_ID
+          }/tiles/256/{z}/{x}/{y}@2x?access_token=${VITE_ACCESS_TOKEN}`}
         />
-        <Marker position={[x, y]}>
+        <Marker position={[x - random(), y - random()]}>
           <Popup>Poste de luz caido</Popup>
+        </Marker>
+
+        <Marker position={[x - random(), y - random()]}>
+          <Popup>Cañeria rota</Popup>
+        </Marker>
+
+        <Marker position={[x - random(), y - random()]}>
+          <Popup>Carretera cortada</Popup>
+        </Marker>
+
+        <Marker position={[x - random(), y - random()]}>
+          <Popup>Apagón</Popup>
+        </Marker>
+
+        <Marker position={[x - random(), y - random()]}>
+          <Popup>Poste de luz caido</Popup>
+        </Marker>
+
+        <Marker position={[x - random(), y - random()]}>
+          <Popup>Cañeria rota</Popup>
+        </Marker>
+
+        <Marker position={[x - random(), y - random()]}>
+          <Popup>Carretera cortada</Popup>
+        </Marker>
+
+        <Marker position={[x - random(), y - random()]}>
+          <Popup>Apagón</Popup>
         </Marker>
       </MapContainer>
     </AspectRatio>
