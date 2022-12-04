@@ -10,7 +10,7 @@ import {
 import { IconArrowUpRight } from "@tabler/icons";
 import { isEmpty, sumBy } from "lodash";
 import { useEffect, useState } from "react";
-import { Status } from "../types/districts";
+import { Municipality, Status } from "../types/districts";
 const useStyles = createStyles(() => ({
   floatCard: {
     zIndex: 10,
@@ -84,11 +84,11 @@ export function StatusReportCard() {
             ? `${currentLocation.name}'s status`
             : "Puerto Rico's status"}
         </Text>
-        {Object.entries(status).map((stat) => {
+        {Object.entries(status).map((stat, i) => {
           const color =
             stat[1] > 60 ? "green" : stat[1] > 40 ? "yellow" : "red";
           return (
-            <div>
+            <div key={i}>
               <RingProgress
                 size={80}
                 roundCaps

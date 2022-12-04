@@ -30,9 +30,9 @@ export function CustomNavBar() {
         label={"Puerto Rico"}
         childrenOffset={28}
         defaultOpened={false}
-        onClick={() => {
-          handleNavLinkClick(PR as Distric);
-        }}
+        // onClick={() => {
+        //   handleNavLinkClick(PR);
+        // }}
       />
 
       <Navbar.Section grow component={ScrollArea} mx="-xs" px="xs">
@@ -44,7 +44,7 @@ export function CustomNavBar() {
               childrenOffset={28}
               defaultOpened={false}
               onClick={() => {
-                handleNavLinkClick(location);
+                handleNavLinkClick(location as Distric);
               }}
             >
               {location.municipalities.map((municipality, i) => {
@@ -52,7 +52,9 @@ export function CustomNavBar() {
                   <NavLink
                     key={i}
                     label={municipality.name}
-                    onClick={() => setCurrentLocation(municipality)}
+                    onClick={() =>
+                      setCurrentLocation(municipality as Municipality)
+                    }
                   />
                 );
               })}
