@@ -60,13 +60,6 @@ export default function HomePage() {
   const locationName =
     currentLocation?.name === "Puerto Rico" ? " " : currentLocation?.name;
 
-  //#TODO: make it so users can't zoom out too far away from the island
-  // if (currentLocation?.coordinates?.zoom! < 7) {
-  //   let updateCurrentLocation = currentLocation;
-  //   updateCurrentLocation.coordinates.zoom = 2;
-  //   setCurrentLocation(updateCurrentLocation);
-  // }
-
   return (
     <AspectRatio ratio={width / height}>
       <>
@@ -75,7 +68,7 @@ export default function HomePage() {
           onClose={() => setOpened(false)}
           title={`Submit report for ${locationName}`}
         >
-          <ReportStatusFormDialog />
+          <ReportStatusFormDialog onClose={setOpened} />
         </Modal>
         <Group>
           <Button

@@ -12,14 +12,6 @@ import { useForm } from "@mantine/form";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 
-//#TODO: change this mapception to lodash to correctly create the data array for select
-// should look lile [{value: municipality.name, label: municipality.name}]
-
-// const municipalities = PRdata.map((district) =>
-//   district.municipalities.map((municipality) => municipality.name)
-// ).flat(1);
-// console.log({ municipalities });
-
 const municipalities = [
   { value: "San Juan", label: "San Juan" },
   { value: "Guaynabo", label: "Guaynabo" },

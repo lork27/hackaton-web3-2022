@@ -22,6 +22,12 @@ export function UserProfile() {
   const dark = colorScheme === "dark";
   const currentColor = dark ? "orange" : "blue";
 
+  function verifiedDate(param: any) {
+    try {
+      return param.split("T")[0];
+    } catch (error) {}
+  }
+
   return (
     <>
       <Modal
@@ -71,7 +77,8 @@ export function UserProfile() {
                 <>
                   <Text my={"xs"}>
                     Verified since:{" "}
-                    {userData.verified.verifiedDate.split("T")[0]}
+                    {verifiedDate(userData?.verified.verifiedDate) &&
+                      verifiedDate(userData?.createdAt)}
                   </Text>
                   <ActionIcon
                     variant="filled"

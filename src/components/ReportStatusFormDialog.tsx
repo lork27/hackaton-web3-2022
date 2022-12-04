@@ -8,10 +8,12 @@ import {
   Switch,
   Text,
   useMantineColorScheme,
+  LoadingOverlay,
 } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { useAuth } from "../context/AuthContext";
 import { isEmpty } from "lodash";
+import { useState } from "react";
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -42,36 +44,41 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function ReportStatusFormDialog() {
+export function ReportStatusFormDialog(props: any) {
   const { userData } = useAuth();
-  // #NOTE: either pass currentLocation as prop or grab it from the map context
-
+  const { colorScheme } = useMantineColorScheme();
   const { classes } = useStyles();
 
-  const { colorScheme } = useMantineColorScheme();
+  const [loading, setLoading] = useState(false);
   const dark = colorScheme === "dark";
   const currentColor = dark ? "orange" : "blue";
 
   const handleReportSubmit = () => {
-    if (!isEmpty(userData?.verified)) {
-      showNotification({
-        title: "Thanks for the report!",
-        color: "green",
-        message: "Report has been verified!",
-        autoClose: 5000,
-      });
-    } else {
-      showNotification({
-        title: "Thanks for the report!",
-        color: "green",
-        message:
-          "Report has been submited for review by the administrator team",
-        autoClose: 5000,
-      });
-    }
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      if (!isEmpty(userData?.verified)) {
+        showNotification({
+          title: "Thanks for the report!",
+          color: "green",
+          message: "Report has been verified!",
+          autoClose: 5000,
+        });
+      } else {
+        showNotification({
+          title: "Thanks for the report!",
+          color: "green",
+          message:
+            "Report has been submited for review by the administrator team",
+          autoClose: 5000,
+        });
+      }
+      props.onClose();
+    }, 3000);
   };
   return (
     <Card withBorder radius="md" p="xl" className={classes.card}>
+      <LoadingOverlay visible={loading} />
       <Text size="lg" className={classes.title} weight={500}></Text>
       What's the situation?
       <Text size="xs" color="dimmed" mt={3} mb="xl">
