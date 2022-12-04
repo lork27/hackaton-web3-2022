@@ -1,5 +1,5 @@
 import { AspectRatio, useMantineColorScheme } from "@mantine/core";
-// import { Marker, Popup, MapContainer, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { PR } from "../types/districts";
 import { useViewportSize } from "@mantine/hooks";
 import { useMapController } from "../context/MapContext";
@@ -11,10 +11,11 @@ import { showNotification } from "@mantine/notifications";
 import { StatusReportCard } from "../components/StatusReportCard";
 import { ReportStatusFormDialog } from "../components/ReportStatusFormDialog";
 import { useAuth } from "../context/AuthContext";
+const { VITE_USERNAME, VITE_STYLE_ID, VITE_ACCESS_TOKEN } = import.meta.env;
 
 const useStyles = createStyles(() => ({
   floatButton: {
-    zIndex: 10,
+    zIndex: 100,
     position: "absolute",
     left: 0,
     top: 0,
@@ -23,7 +24,7 @@ const useStyles = createStyles(() => ({
   floatCard: {
     zIndex: 10,
     position: "absolute",
-    left: 100,
+    left: 0,
     top: 0,
   },
 }));
@@ -60,6 +61,8 @@ export default function HomePage() {
   const locationName =
     currentLocation?.name === "Puerto Rico" ? " " : currentLocation?.name;
 
+  console.log([x, y]);
+
   return (
     <AspectRatio ratio={width / height}>
       <>
@@ -84,9 +87,22 @@ export default function HomePage() {
           <StatusReportCard />
         </Group>
       </>
-      <iframe
-        src={`https://api.maptiler.com/maps/8d1659b0-75bc-4a7e-bf3f-cf5fccd4e0ef/?key=qaioH87PxUIdnaDl3ycV#${zoom}/${x}/${y}`}
-      ></iframe>
+
+      <MapContainer
+        key={currentLocation?.name}
+        center={[x, y]}
+        zoom={zoom}
+        scrollWheelZoom={false}
+        style={{ minHeight: "90vh", minWidth: "100vw", zIndex: 0 }}
+      >
+        <TileLayer
+          attribution='Imagery &copy; <a href="https://www.mapbox.com/">Mapbox</a>'
+          url={`https://api.mapbox.com/styles/v1/${VITE_USERNAME}/${VITE_STYLE_ID}/tiles/256/{z}/{x}/{y}@2x?access_token=${VITE_ACCESS_TOKEN}`}
+        />
+        <Marker position={[x, y]}>
+          <Popup>Poste de luz caido</Popup>
+        </Marker>
+      </MapContainer>
     </AspectRatio>
   );
 }

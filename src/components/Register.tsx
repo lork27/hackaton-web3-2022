@@ -7,6 +7,7 @@ import {
   TextInput,
   Select,
   useMantineColorScheme,
+  LoadingOverlay,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
@@ -19,7 +20,7 @@ const municipalities = [
 ];
 
 export function Register() {
-  const { registerUser } = useAuth();
+  const { registerUser, userData } = useAuth();
   const form: any = useForm({
     initialValues: {
       email: "",
@@ -38,6 +39,7 @@ export function Register() {
   });
 
   const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
@@ -45,12 +47,17 @@ export function Register() {
 
   const handleFormSubmit = () => {
     form.validate();
+    setLoading(true);
     registerUser(form.values);
+    if (userData) {
+      setLoading(false);
+    }
   };
 
   return (
     <Box sx={{ maxWidth: 400 }} m="md" mx="auto">
       <>
+        <LoadingOverlay visible={loading} />
         <Text color={currentColor} fw={700}>
           Register
         </Text>
